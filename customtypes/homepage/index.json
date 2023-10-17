@@ -1,16 +1,17 @@
 {
-  "id": "ladingpage",
-  "label": "LadingPage",
+  "id": "homepage",
+  "label": "Homepage",
   "format": "page",
-  "repeatable": true,
+  "repeatable": false,
   "status": true,
   "json": {
     "Main": {
-      "uid": {
+      "title": {
+        "type": "Text",
         "config": {
-          "label": "UID"
-        },
-        "type": "UID"
+          "label": "Title",
+          "placeholder": ""
+        }
       },
       "slices": {
         "type": "Slices",
@@ -21,6 +22,13 @@
       }
     },
     "SEO & Metadata": {
+      "meta_title": {
+        "config": {
+          "label": "Meta Title",
+          "placeholder": "A title of the page used for social media and search engines"
+        },
+        "type": "Text"
+      },
       "meta_description": {
         "config": {
           "label": "Meta Description",
@@ -38,13 +46,6 @@
           "thumbnails": []
         },
         "type": "Image"
-      },
-      "meta_title": {
-        "config": {
-          "label": "Meta Title",
-          "placeholder": "A title of the page used for social media and search engines"
-        },
-        "type": "Text"
       }
     }
   }

@@ -4,78 +4,89 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type LadingpageDocumentDataSlicesSlice = never;
+type HomepageDocumentDataSlicesSlice = never;
 
 /**
- * Content for LadingPage documents
+ * Content for Homepage documents
  */
-interface LadingpageDocumentData {
+interface HomepageDocumentData {
   /**
-   * Slice Zone field in *LadingPage*
+   * Title field in *Homepage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: homepage.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *Homepage*
    *
    * - **Field Type**: Slice Zone
    * - **Placeholder**: *None*
-   * - **API ID Path**: ladingpage.slices[]
+   * - **API ID Path**: homepage.slices[]
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<LadingpageDocumentDataSlicesSlice>
+  slices: prismic.SliceZone<HomepageDocumentDataSlicesSlice>
   /**
-   * Meta Description field in *LadingPage*
+   * Meta Title field in *Homepage*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: A brief summary of the page
-   * - **API ID Path**: ladingpage.meta_description
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: homepage.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Homepage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: homepage.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
   meta_description: prismic.KeyTextField;
 
   /**
-   * Meta Image field in *LadingPage*
+   * Meta Image field in *Homepage*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: ladingpage.meta_image
+   * - **API ID Path**: homepage.meta_image
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   meta_image: prismic.ImageField<never>;
-
-  /**
-   * Meta Title field in *LadingPage*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A title of the page used for social media and search engines
-   * - **API ID Path**: ladingpage.meta_title
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  meta_title: prismic.KeyTextField;
 }
 
 /**
- * LadingPage document from Prismic
+ * Homepage document from Prismic
  *
- * - **API ID**: `ladingpage`
- * - **Repeatable**: `true`
+ * - **API ID**: `homepage`
+ * - **Repeatable**: `false`
  * - **Documentation**: https://prismic.io/docs/custom-types
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type LadingpageDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<LadingpageDocumentData>,
-    "ladingpage",
+export type HomepageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<HomepageDocumentData>,
+    "homepage",
     Lang
   >;
 
 /**
- * Item in *Settings → Navgitation*
+ * Item in *Settings → Navigation*
  */
 export interface SettingsDocumentDataNavgitationItem {
   /**
-   * Link field in *Settings → Navgitation*
+   * Link field in *Settings → Navigation*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
@@ -85,7 +96,7 @@ export interface SettingsDocumentDataNavgitationItem {
   link: prismic.LinkField;
 
   /**
-   * Label field in *Settings → Navgitation*
+   * Label field in *Settings → Navigation*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -133,7 +144,7 @@ interface SettingsDocumentData {
   og_image: prismic.ImageField<never>;
 
   /**
-   * Navgitation field in *Settings*
+   * Navigation field in *Settings*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
@@ -162,7 +173,7 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = LadingpageDocument | SettingsDocument;
+export type AllDocumentTypes = HomepageDocument | SettingsDocument;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -174,9 +185,9 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
-      LadingpageDocument,
-      LadingpageDocumentData,
-      LadingpageDocumentDataSlicesSlice,
+      HomepageDocument,
+      HomepageDocumentData,
+      HomepageDocumentDataSlicesSlice,
       SettingsDocument,
       SettingsDocumentData,
       SettingsDocumentDataNavgitationItem,
